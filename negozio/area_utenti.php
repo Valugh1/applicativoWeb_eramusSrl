@@ -1,0 +1,35 @@
+<?php
+session_start();
+
+
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>area utenti</title>
+</head>
+
+<body>
+
+
+    <ul>
+        <li>pulsante inserimento nuovo utente che rimanda a registrazione</li>
+        <li>
+            <ul>
+                <li>pulsante cerca che richiama utenti dal db in base alla ricerca effettuata</li>
+                <li>pulsante modifica che richiama il form registrazione</li>
+                <li>pulsante elimina</li>
+            </ul>
+        </li>
+    </ul>
+
+</body>
+
+</html>
