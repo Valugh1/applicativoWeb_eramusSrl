@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 //setto variabili utente nella sessione
                 $_SESSION['loggato'] = true;
                 $_SESSION['username'] = $row['username'];
-                header("location: area-privata.php");
+                header("location: interfaccia.php");
             } else {
                 echo "<p class='text-danger'>la password non e' corretta</p>";
             }

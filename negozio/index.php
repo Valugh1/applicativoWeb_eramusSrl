@@ -9,38 +9,17 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+
     <title>Login</title>
+
 </head>
 
 <body>
     <div class="row" style="margin-top: 12%;">
-        <!-- <div class="mx-auto col-10 col-md-8 col-lg-6">
-                <form action="php/login.php" method="POST" class="form-horizontal">
-                    <h3 style="margin-left: 45%; margin-bottom: 60px;">Accedi</h3>
-                    <div class="form-group">
-                        <label for="username" class="col-sm-2">Username:</label>
-                        <div>
-                            <input type="text" id="username" name="username" class="form-control" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="col-sm-2">Password:</label>
-                        <input type="password" id="password" name="password" class="form-control" required>
-                    </div>
-
-                    <div class="col-sm-offset-2 col-sm-10" style="margin-left: 45%;">
-                        <input class="btn btn-light" type="submit" value="login">
-                    </div>
-                    <p>Non hai ancora un account?<a href="registrazione.php"> registrati!</a></p>
-
-                </form><br>
-            </div> -->
-
-
 
 
         <div class="container">
+
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-5">
@@ -106,6 +85,7 @@
                 </div>
             </div>
         </div>
+
         <script src="script/script1.js"></script>
 </body>
 
