@@ -1,5 +1,19 @@
 <?php
 
+use database_crud\crud;
+
+require_once("crud.php");
+
+//importo la classe
+
+
+if (crud::create($_POST["username"], $_POST["password"], $_POST["nome"], $_POST["cognome"]) == true) {
+    header("location: search.php");
+}
+
+
+
+/*
 require_once("config.php");
 //controllo escapes
 $username = $connessione->real_escape_string($_POST["username"]);
@@ -24,4 +38,4 @@ if ($insert_utenti->execute() == true) {
     header("location: ../index.php");
 } else {
     die("Errore registrazione utente $sql: " . $connessione->error);
-}
+}*/
