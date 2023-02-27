@@ -76,13 +76,15 @@
             if (isset($_POST['submit'])) {
 
                 $search = $_POST['search'];
-                //seleziona tutti i campi compreso il tipo di prodotto ma solo se scritto per esteso
-                $sqlQuery = "SELECT * FROM `inventario` 
-                    WHERE id_inventario like '%$search%' 
-                    OR nome_prodotto like '%$search%' 
-                    OR descrizione like '%$search%' 
-                    OR data_inserimento like '%$search%' 
-                    OR tipo_prodotto like '%$search%'";
+                //seleziona tutti i campi compreso il tipo di prodotto.
+                $sqlQuery = "SELECT inventario.*, tipo_prodotto.tipo 
+                            FROM inventario 
+                            INNER JOIN tipo_prodotto 
+                            ON inventario.tipo_prodotto = tipo_prodotto.id 
+                            WHERE id_inventario like '%$search%' 
+                            OR nome_prodotto like '%$search%' 
+                            OR descrizione like '%$search%' 
+                            OR data_inserimento like '%$search%'";
 
                 $result = mysqli_query($conn, $sqlQuery);
 
@@ -96,6 +98,7 @@
                     <th>Nome del prodotto</th>
                     <th>Descrizione</th>
                     <th>Data di inserimento</th>
+                    <th>Tipo prodotto</th>
                     <th>Azioni: </th>
                 </tr>
                     </thead>';
@@ -107,6 +110,7 @@
                         echo "<td id='nome_prodotto'>" . $row["nome_prodotto"] . "</td>";
                         echo "<td id='descrizione'>" . $row["descrizione"] . "</td>";
                         echo "<td id='data_inserimento'>" . $row["data_inserimento"] . "</td>";
+                        echo "<td id='tipo_prodotto'>" . $row["tipo"] . "</td>";
                         echo "<td> <a href='i_update.php?id_inventario="  . $row["id_inventario"] . "'>Edit</a>  <a href='i_delete.php?id_inventario="  . $row["id_inventario"] . "'>Delete</a></td>";
                         echo "</tr>";
                         echo "</tbody>";
