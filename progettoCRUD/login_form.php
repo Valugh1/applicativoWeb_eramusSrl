@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <h1 style="margin-left:40%">Accesso al gestionale.</h1>
     <div class="row" style="margin-top: 12%;">
 
 
@@ -63,30 +64,25 @@
                                 </form>
                             </div>
 
-                            <!-- Links -->
-                            <div class="bottom text-center">
-                                Non hai ancora un account? <a href="register/register_form.html"><b>Registrati</b></a>
-                                <?php
-                                if (isset($_GET["ui"]) && ($_GET["ui"] == "username_inesistente")) { ?>
+                            <?php
+                            if (isset($_GET["ui"]) && ($_GET["ui"] == "username_inesistente")) { ?>
 
-                                    <script>
-                                        alert("Username inesistente!");
-                                        window.open("location: login.php", "target=_self");
-                                    </script>
+                                <script>
+                                    alert("Username inesistente!");
+                                    window.open("location: login.php", "target=_self");
+                                </script>
 
+                            <?php };
 
-
-                                <?php };
-
-                                ?>
-                            </div>
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="script/script.js"></script>
+    <script src="script/script.js"></script>
 </body>
 
 </html>
