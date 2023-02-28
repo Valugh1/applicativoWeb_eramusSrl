@@ -41,7 +41,7 @@
                     echo "Username:" . $row["nome_prodotto"] .  "<br>";
                     echo "Sei sicuro di eliminare questo prodotto?<br>";
                     echo "<input type='hidden' name='conferma' value='SI'>";
-                    echo "<input type='submit' value='SI'>";
+                    echo "<button class='btn btn-danger btn-sm' type='submit' value=''>Si</button>";
                 }
             } elseif ($_GET['id_inventario'] && $_GET['conferma']) {
                 // Fase 2

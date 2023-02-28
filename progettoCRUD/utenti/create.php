@@ -20,7 +20,7 @@ session_start()
 
 <body>
 
-    <h1>CREATE</h1>
+    <h1 style="text-align:center">Nuovo utente</h1>
 
     <div class="contenitore crea">
         <div class="container">
@@ -134,7 +134,7 @@ session_start()
 
                                     <!-- Submit -->
                                     <div class="form-group">
-                                        <button type="submit" value="1" id="reg_submit" class="btn btn-block btn-primary" disabled="disabled" name="submit">Crea utente</button>
+                                        <button type="submit" value="1" id="reg_submit" class="btn btn-block btn-success" disabled="disabled" name="submit">Crea utente</button>
                                         <div id="sign-up-popover" class="hide">
                                             <p>vuoto</p>
                                         </div>

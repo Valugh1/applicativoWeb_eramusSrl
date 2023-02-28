@@ -40,7 +40,7 @@
                     echo "Username:" . $row["username"] .  "<br>";
                     echo "Sei sicuro di eliminare questo record?<br>";
                     echo "<input type='hidden' name='conferma' value='SI'>";
-                    echo "<input type='submit' value='SI'>";
+                    echo "<button class='btn btn-danger btn-sm' type='submit' value=''>Si</button>";
                 }
             } elseif ($_GET['id'] && $_GET['conferma']) {
                 // FASE 2

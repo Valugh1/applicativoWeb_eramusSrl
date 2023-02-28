@@ -14,11 +14,46 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
         <style>
+            body {
+                padding: 10px;
+            }
+
             table,
             th,
             td {
                 border: 1px solid;
             }
+
+            /*
+            .container {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 1em;
+            }
+
+            .item {
+                width: 100%;
+                margin-bottom: 1em;
+                justify-items: end;
+            }
+
+            .search-container {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 20px;
+            }
+
+            .search {
+                margin-bottom: 20px;
+            }
+
+            .create {
+                position: absolute;
+                bottom: 20px;
+                left: 10%;
+            }*/
         </style>
         <script>
             function showCarta() {
@@ -51,21 +86,25 @@
     </head>
 
     <body>
-        <a href="i_create.php">Aggiungi nuovo prodotto</a><br>
-        <h1>Ricerca prodotti</h1><br>
 
 
 
-        <!-- form ricerca -->
+        <!-- creazione nuovo prodotto-->
+        <button class="create btn btn-dark btn-sm" onclick="location.href='i_create.php'">Aggiungi nuovo prodotto</button>
+        <!-- ricerca prodotti-->
         <div class="search">
+            <h1>Ricerca prodotti</h1>
             <form action="" method="post">
                 <input type="text" name="search" placeholder="inserisci la parola chiave">
                 <button name="submit" class="btn btn-dark btn-sm">Cerca</button>
             </form>
         </div>
 
+
+
         <!-- tabella risultati-->
-        <table>
+
+        <table class="table">
 
 
 
@@ -92,14 +131,14 @@
 
                 if ($result->num_rows > 0) {
                     //creo struttura iniziale
-                    echo '<thead>
+                    echo '<thead class="thead-light">
                 <tr>
-                    <th>Id</th>
-                    <th>Nome del prodotto</th>
-                    <th>Descrizione</th>
-                    <th>Data di inserimento</th>
-                    <th>Tipo prodotto</th>
-                    <th>Azioni: </th>
+                    <th scope="row">Id</th>
+                    <th scope="row">Nome del prodotto</th>
+                    <th scope="row">Descrizione</th>
+                    <th scope="row">Data di inserimento</th>
+                    <th scope="row">Tipo prodotto</th>
+                    <th scope="row">Azioni</th>
                 </tr>
                     </thead>';
                     // output data di ogni riga
@@ -111,7 +150,7 @@
                         echo "<td id='descrizione'>" . $row["descrizione"] . "</td>";
                         echo "<td id='data_inserimento'>" . $row["data_inserimento"] . "</td>";
                         echo "<td id='tipo_prodotto'>" . $row["tipo"] . "</td>";
-                        echo "<td> <a href='i_update.php?id_inventario="  . $row["id_inventario"] . "'>Edit</a>  <a href='i_delete.php?id_inventario="  . $row["id_inventario"] . "'>Delete</a></td>";
+                        echo "<td><button class='btn btn-secondary btn-sm' style='margin-bottom:2px;' onclick=\"location.href='i_update.php?id_inventario=" . $row["id_inventario"] . "'\">Edit</button> <a href='i_delete.php?id_inventario=" . $row["id_inventario"] . "' class='btn btn-danger btn-sm'>Delete</a></td>";
                         echo "</tr>";
                         echo "</tbody>";
                     }
@@ -131,37 +170,39 @@
 
 
 
+
         <br>
 
 
         <!-- visualizzazione elementi "carta" -->
-        <button onclick="showCarta()">Lista prodotti categoria "CARTA"</button>
-        <span id="tableCarta" style="display: none">
-            <?php
-            include("selectCarta.php");
-            ?>
-        </span>
-        <br>
-
-
-        <!-- visualizzazione elementi "buste" -->
-        <button onclick="showBuste()">Lista prodotti categoria "BUSTE"</button>
-        <span id="tableBuste" style="display: none">
-            <?php
-            include("selectBuste.php");
-            ?>
-        </span>
-        <br>
-
-
-        <!-- visualizzazione elementi "toner" -->
-        <button onclick="showToner()">Lista prodotti categoria "TONER"</button>
-        <span id="tableToner" style="display: none">
-            <?php
-            include("selectToner.php");
-            ?>
-        </span>
-
+        <div class="container">
+            <div class="item">
+                <button class="btn btn-dark btn-sm" onclick="showCarta()">Lista prodotti categoria 'CARTA'</button>
+                <span id="tableCarta" style="display:none">
+                    <?php
+                    include("selectCarta.php");
+                    ?>
+                </span>
+                <!-- visualizzazione elementi "carta" -->
+            </div>
+            <div class="item">
+                <button class="btn btn-dark btn-sm" onclick="showBuste()">Lista prodotti categoria 'BUSTE'</button>
+                <span id="tableBuste" style="display:none">
+                    <?php
+                    include("selectBuste.php");
+                    ?>
+                </span>
+                <!-- visualizzazione elementi "carta" -->
+            </div>
+            <div class="item">
+                <button class="btn btn-dark btn-sm" onclick="showToner()">Lista prodotti categoria 'TONER'</button>
+                <span id="tableToner" style="display:none">
+                    <?php
+                    include("selectToner.php");
+                    ?>
+                </span>
+            </div>
+        </div>
         <?php
         $conn->close();
         ?>

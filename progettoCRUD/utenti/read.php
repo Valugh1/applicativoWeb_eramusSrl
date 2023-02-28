@@ -18,7 +18,7 @@
     </head>
 
     <body>
-        <a href="create.php">Create record</a><br>
+        <button class="btn btn-dark btn-sm" onclick="location.href='create.php'">Aggiungi nuovo prodotto</button>
         <h1>Ricerca utenti</h1><br>
 
 
@@ -26,13 +26,13 @@
         <!-- form ricerca -->
         <div class="search">
             <form action="" method="post">
-                <input type="text" name="search" placeholder="inserisci la ricerca">
+                <input type="text" name="search" placeholder="inserisci la parola chiave">
                 <button name="submit" class="btn btn-dark btn-sm">Search</button>
             </form>
 
 
             <!-- tabella risultati-->
-            <table>
+            <table class="table">
 
 
 
@@ -52,24 +52,26 @@
 
                     if ($result->num_rows > 0) {
                         //creo struttura iniziale
-                        echo '<thead>
+                        echo '<thead class="thead-light">
                 <tr>
                     <th>ID</th>
                     <th>USERNAME</th>
                     <th>NOME</th>
                     <th>COGNOME</th>
                     <th>DATA DI NASCITA</th>
+                    <th>Azioni</th>
                 </tr>
                     </thead>';
                         // output data di ogni riga
                         while ($row = $result->fetch_assoc()) {
-                            echo "<tbody>";
+                            echo "<tbody >";
                             echo "<tr>";
                             echo "<td id='id'>" . $row["id"] . "</td>";
                             echo "<td id='username'>" . $row["username"] . "</td>";
                             echo "<td id='nome'>" . $row["nome"] . "</td>";
                             echo "<td id='cognome'>" . $row["cognome"] . "</td>";
-                            echo "<td id='dob'>" . $row["dob"] . "<a href='update.php?id="  . $row["id"] . "'>Edit</a>  <a href='delete.php?id="  . $row["id"] . "'>Delete</a></td>";
+                            echo "<td id='dob'>" . $row["dob"] . "</td>";
+                            echo "<td><button class='btn btn-secondary btn-sm' style='margin-bottom:2px;' onclick=\"location.href='update.php?id=" . $row["id"] . "'\">Edit</button> <a href='delete.php?id=" . $row["id"] . "' class='btn btn-danger btn-sm'>Delete</a>";
                             echo "</tr>";
                             echo "</tbody>";
                         }
@@ -81,9 +83,6 @@
                 $conn->close();
                 ?>
             </table>
-
-
-            <br>
 
 
 

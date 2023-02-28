@@ -29,13 +29,14 @@
 
     if ($result1->num_rows > 0) {
         //creo struttura iniziale
-        echo '<table>
-                <thead>
+        echo '<table class="table">
+                <thead class="thead-light">
                 <tr>
-                    <th>ID</th>
-                    <th>Nome del prodotto</th>
-                    <th>Descrizione</th>
-                    <th>Data di inserimento</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome del prodotto</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Data di inserimento</th>
+                    <th scope="col">Azioni</th>
                 </tr>
                     </thead>';
         // output data di ogni riga
@@ -45,7 +46,8 @@
             echo "<td id='id_inventario'>" . $row["id_inventario"] . "</td>";
             echo "<td id='nome_prodotto'>" . $row["nome_prodotto"] . "</td>";
             echo "<td id='descrizione'>" . $row["descrizione"] . "</td>";
-            echo "<td id='data_inserimento'>" . $row["data_inserimento"] . " <a href='update.php?id="  . $row["id_inventario"] . "'>Edit</a>  <a href='delete.php?id="  . $row["id_inventario"] . "'>Delete</a></td>";
+            echo "<td id='data_inserimento'>" . $row["data_inserimento"] . "</td>";
+            echo "<td><button class='btn btn-secondary btn-sm' style='margin-bottom:2px;' onclick=\"location.href='i_update.php?id_inventario=" . $row["id_inventario"] . "'\">Edit</button> <a href='i_delete.php?id_inventario=" . $row["id_inventario"] . "' class='btn btn-danger btn-sm'>Delete</a></td>";
             echo "</tr>";
             echo "</tbody>";
         }

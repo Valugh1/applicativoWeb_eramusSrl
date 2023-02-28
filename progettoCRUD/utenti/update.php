@@ -40,9 +40,6 @@
                 if ($result->num_rows == 1) {
                     // output data of each row --- $row["id"]
                     $row = $result->fetch_assoc();
-                    echo "<pre>";
-                    print_r($row);
-                    echo "</pre>";
 
                     echo "<input type='hidden' name='id' value='" . $row["id"] . "'>";
                     echo "<label for='username'>username:</label><br>";
@@ -53,7 +50,7 @@
                     echo "<input type='text' id='nome' name='nome' value='" . $row["nome"] .  "'><br>";
                     echo "<label for='cognome'>Cognome:</label><br>";
                     echo "<input type='text' id='cognome' name='cognome' value='" . $row["cognome"] .  "'><br>";
-                    echo "<input type='submit' value='AGGIORNA'>";
+                    echo "<input class='btn btn-dark btn-sm' style='margin-top:10px;' type='submit' value='AGGIORNA'>";
                 }
             } elseif ($_GET['id'] && $_GET['username']) {
                 // FASE 2
