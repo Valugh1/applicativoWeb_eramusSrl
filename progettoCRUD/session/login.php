@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             }
         } else {
             echo "username inesistente";
-            header("location: ../login_form.php?ui=username_inesistente");
+            // header("location: ../login_form.php?ui=username_inesistente");
         }
     } else {
         echo "errore in fase di login";

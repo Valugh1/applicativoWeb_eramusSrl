@@ -43,7 +43,7 @@
         // output data di ogni riga
         while ($row = $result1->fetch_assoc()) {
             echo "<tbody>";
-            echo "<tr>";
+            echo "<tr style='background: #f7f9fa'>";
             echo "<td id='id_inventario'>" . $row["id_inventario"] . "</td>";
             echo "<td id='nome_prodotto'>" . $row["nome_prodotto"] . "</td>";
             echo "<td id='descrizione'>" . $row["descrizione"] . "</td>";

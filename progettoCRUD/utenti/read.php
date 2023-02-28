@@ -15,9 +15,56 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
 
         <link rel="stylesheet" href="../style/style.css">
+        <style>
+            body {
+                padding: 0;
+                margin: 0;
+                background: rgb(217, 245, 254);
+                background: linear-gradient(0deg, rgba(217, 245, 254, 1) 0%, rgba(244, 255, 255, 1) 100%);
+                height: 200vh;
+            }
+        </style>
     </head>
 
     <body>
+        <!-- navbar -->
+        <!-- messaggio benvenuto -->
+        <nav id="navigazione" class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand"><span>
+                    <?php
+                    echo "Benvenuto, " . $_SESSION['username'] . ".";
+                    ?>
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <!-- Home -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- utenti -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="utenti/read.php">Area utenti</a>
+                    </li>
+                    <!-- inventario -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="inventario/i_read.php">Area inventario</a>
+                    </li>
+                </ul>
+
+                <button class="btn btn-outline-dark" id="logout">Logout</button>
+                <script>
+                    logout.addEventListener("click", function() {
+                        location.href = "session/logout.php";
+                    });
+                </script>
+            </div>
+        </nav>
+        <!-- resto -->
         <button class="btn btn-dark btn-sm" onclick="location.href='create.php'">Aggiungi nuovo prodotto</button>
         <h1>Ricerca utenti</h1><br>
 
@@ -26,7 +73,7 @@
         <!-- form ricerca -->
         <div class="search">
             <form action="" method="post">
-                <input type="text" name="search" placeholder="inserisci la parola chiave">
+                <input type="text" name="search" class="form_group" placeholder="inserisci la parola chiave">
                 <button name="submit" class="btn btn-dark btn-sm">Search</button>
             </form>
 
