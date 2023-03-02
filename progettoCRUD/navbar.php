@@ -36,7 +36,7 @@
             <ul class="navbar-nav mr-auto">
                 <!-- Home -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="">Home</a>
+                    <a class="nav-link" href="<?php get_home_directory() ?>">Home</a>
                 </li>
                 <!-- area utenti -->
                 <li class="nav-item dropdown active">
@@ -75,6 +75,25 @@
 
 </html>
 <?php
+
+function get_home_directory()
+{
+    $read_file_path = '';
+    switch (true) {
+        case is_file("../interfaccia_iniziale.php"):
+            $read_file_path = "../interfaccia_iniziale.php";
+            echo $read_file_path;
+            break;
+        case is_file("interfaccia_iniziale.php"):
+            $read_file_path = "interfaccia_iniziale.php";
+            echo $read_file_path;
+            break;
+        default:
+            echo "directory non trovata.";
+            break;
+    }
+}
+
 function get_read_directory()
 {
     $read_file_path = '';
