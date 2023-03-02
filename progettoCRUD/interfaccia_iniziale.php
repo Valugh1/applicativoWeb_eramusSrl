@@ -20,7 +20,7 @@ if (!isset($_SESSION['loggato']) || ($_SESSION['loggato']) !== true) {
     <!-- navbar -->
     <?php include("navbar.php"); ?>
 
-    <p>Benvenuto nel gestionale. utilizza la navbar per muoverti attraverso le pagine.</p>
+
     <!-- footer -->
     <?php include("footer.php"); ?>
 </body>
