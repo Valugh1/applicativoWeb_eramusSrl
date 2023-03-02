@@ -5,84 +5,43 @@
     <html>
 
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--jQuery-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-
-        <link rel="stylesheet" href="../style/style.css">
+        <?php include("../header.php"); ?>
         <style>
-            body {
-                padding: 0;
-                margin: 0;
-                background: rgb(217, 245, 254);
-                background: linear-gradient(0deg, rgba(217, 245, 254, 1) 0%, rgba(244, 255, 255, 1) 100%);
-                height: 200vh;
+            .search {
+                text-align: center;
+                margin-top: 60px;
+                margin-bottom: 40px;
+            }
+
+            .tableDiv {
+                width: 90%;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                justify-items: center;
+                align-items: center;
             }
         </style>
+        <title>Trova utente</title>
     </head>
 
     <body>
+
         <!-- navbar -->
-        <!-- messaggio benvenuto -->
-        <nav id="navigazione" class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand"><span>
-                    <?php
-                    echo "Benvenuto, " . $_SESSION['username'] . ".";
-                    ?>
-                </span>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <!-- Home -->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <!-- utenti -->
-                    <li class="nav-item active">
-                        <a class="nav-link" href="utenti/read.php">Area utenti</a>
-                    </li>
-                    <!-- inventario -->
-                    <li class="nav-item">
-                        <a class="nav-link active" href="inventario/i_read.php">Area inventario</a>
-                    </li>
-                </ul>
-
-                <button class="btn btn-outline-dark" id="logout">Logout</button>
-                <script>
-                    logout.addEventListener("click", function() {
-                        location.href = "session/logout.php";
-                    });
-                </script>
-            </div>
-        </nav>
-        <!-- resto -->
-        <button class="btn btn-dark btn-sm" onclick="location.href='create.php'">Aggiungi nuovo prodotto</button>
-        <h1>Ricerca utenti</h1><br>
-
-
+        <?php include("../navbar.php"); ?>
 
         <!-- form ricerca -->
         <div class="search">
+            <h2>Ricerca utenti</h2>
             <form action="" method="post">
                 <input type="text" name="search" class="form_group" placeholder="inserisci la parola chiave">
-                <button name="submit" class="btn btn-dark btn-sm">Search</button>
+                <button name="submit" class="btn btn-secondary ">Search</button>
             </form>
+        </div>
 
-
-            <!-- tabella risultati-->
+        <!-- tabella risultati-->
+        <div class="tableDiv">
             <table class="table">
-
-
-
                 <?php
                 include_once("../session/config.php");
 
@@ -99,8 +58,8 @@
 
                     if ($result->num_rows > 0) {
                         //creo struttura iniziale
-                        echo '<thead class="thead-light">
-                <tr>
+                        echo '<thead>
+                <tr style="background: #81B0F3">
                     <th>ID</th>
                     <th>USERNAME</th>
                     <th>NOME</th>
@@ -111,8 +70,8 @@
                     </thead>';
                         // output data di ogni riga
                         while ($row = $result->fetch_assoc()) {
-                            echo "<tbody >";
-                            echo "<tr>";
+                            echo "<tbody>";
+                            echo "<tr style='background: #d5e3f5'>";
                             echo "<td id='id'>" . $row["id"] . "</td>";
                             echo "<td id='username'>" . $row["username"] . "</td>";
                             echo "<td id='nome'>" . $row["nome"] . "</td>";
@@ -130,9 +89,10 @@
                 $conn->close();
                 ?>
             </table>
+        </div>
 
-
-
+        <!-- footer -->
+        <?php include("../footer.php"); ?>
     </body>
 
     </html>

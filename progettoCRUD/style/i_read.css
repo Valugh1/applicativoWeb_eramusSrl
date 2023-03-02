@@ -1,0 +1,16 @@
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.buttonContainer button {
+    margin: 0 10px;
+}
+
+.buttonContainer div {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

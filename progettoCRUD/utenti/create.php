@@ -6,20 +6,17 @@ session_start()
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--jQuery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="../style/style.css">
+    <?php include("../header.php"); ?>
+    <link rel="stylesheet" href="../style/form.css">
+    </style>
+    <title>Nuovo utente</title>
 </head>
 
 <body>
+    <!-- navbar -->
+    <?php include("../navbar.php"); ?>
 
+    <!-- form creazione utente -->
     <div class="contenitore crea">
         <div class="container">
             <div class="row">
@@ -68,7 +65,7 @@ session_start()
 
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="button" id="button-append1" onclick="togglePassword()">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    <i class="fa-solid fa-eye"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -83,7 +80,8 @@ session_start()
 
                                                 <ul class="list-unstyled">
                                                     <li class="">
-                                                        <span class="eight-character"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                                                        <span class="eight-character"> <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </span>
                                                         &nbsp; min 8 caratteri
                                                     </li>
                                                     <li class="">
@@ -114,7 +112,7 @@ session_start()
 
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="button" id="button-append2" onclick="togglePasswordConfirm()">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    <i class="fa-solid fa-eye"></i>
                                                 </button>
                                             </div>
 
@@ -182,7 +180,9 @@ session_start()
     $conn->close();
     ?>
 
-    <script src="../script/script.js"></script>
+    <script src="../script/passValidation.js"></script>
+    <!-- footer -->
+    <?php include("../footer.php"); ?>
 </body>
 
 </html>

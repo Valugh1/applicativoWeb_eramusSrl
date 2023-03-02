@@ -1,127 +1,75 @@
     <?php
-    session_start()
+    session_start();
     ?>
     <!DOCTYPE html>
     <html>
 
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--jQuery-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="../style/style.css">
+        <?php include("../header.php"); ?>
+        <!--<link rel="stylesheet" href="../style/i_read.css">-->
         <style>
-            table,
-            th,
-            td {
-                border: 1px solid;
-            }
-
-
-            .item>button {
-                margin: 10px 0 10px 0;
-
-            }
-
-            .form_group>input {
-                background-color: #f5f9fa;
-            }
-
-            /*
-            .container {
-
+            #buttonContainer {
                 display: flex;
                 flex-direction: column;
-                align-items: flex-start;
-            }
-*/
-            /*
-            .item {
-                width: 100%;
-                margin-bottom: 1em;
-                justify-items: end;
-            }
-
-            .search-container {
-                position: relative;
-                display: flex;
-                flex-direction: column;
+                justify-content: center;
                 align-items: center;
-                margin-top: 20px;
+                height: 30vh;
+                width: 100%;
+            }
+
+            .bottone {
+                margin: 0 10px;
+            }
+
+            #buttonContainerChild {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
             }
 
             .search {
-                margin-bottom: 20px;
-            }*/
+                text-align: center;
+                margin-top: 60px;
+                margin-bottom: 40px;
+            }
+
+            .tableDiv {
+                width: 90%;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                justify-items: center;
+                align-items: center;
+            }
         </style>
-        <script>
-            function showCarta() {
-                let displayCarta = document.getElementById("tableCarta");
-                if (displayCarta.style.display == "block") {
-                    displayCarta.style.display = "none";
-                } else {
-                    displayCarta.style.display = "block";
-                }
-            }
-
-            function showBuste() {
-                let displayBuste = document.getElementById("tableBuste");
-                if (displayBuste.style.display == "block") {
-                    displayBuste.style.display = "none";
-                } else {
-                    displayBuste.style.display = "block";
-                }
-            }
-
-            function showToner() {
-                let displayToner = document.getElementById("tableToner");
-                if (displayToner.style.display == "block") {
-                    displayToner.style.display = "none";
-                } else {
-                    displayToner.style.display = "block";
-                }
-            }
-        </script>
+        <title>Trova prodotto</title>
     </head>
 
     <body>
-        <?php
-        include("../navbar.php");
-        ?>
+        <!-- navbar -->
+        <?php include("../navbar.php"); ?>
 
-
-        <!-- creazione nuovo prodotto-->
-        <button class="btn btn-primary btn-sm" onclick="location.href='i_create.php'">Aggiungi nuovo prodotto</button>
         <!-- ricerca prodotti-->
         <div class="search">
-            <h1>Ricerca prodotti</h1>
-            <form action="" class="form_group" method="post">
-                <input type="text" name="search" placeholder="inserisci la parola chiave">
-                <button name="submit" class="btn btn-primary btn-sm">Cerca</button>
+            <h2>Ricerca prodotti</h2>
+            <form action="" class="form_group form_groupRead" method="post" style="display: inline-block">
+                <input type="text" name="search" placeholder="inserisci la parola chiave" style="vertical-align: middle;">
+                <button name="submit" class="btn btn-secondary btn-sm" style="vertical-align: middle">Cerca</button>
             </form>
         </div>
 
-
-
         <!-- tabella risultati-->
+        <div class="tableDiv">
+            <table class="table">
+                <?php
+                include_once("../session/config.php");
 
-        <table class="table">
+                //controllo ricerca
+                if (isset($_POST['submit'])) {
 
-
-
-            <?php
-            include_once("../session/config.php");
-
-            //controllo ricerca
-            if (isset($_POST['submit'])) {
-
-                $search = $_POST['search'];
-                //seleziona tutti i campi compreso il tipo di prodotto.
-                $sqlQuery = "SELECT inventario.*, tipo_prodotto.tipo 
+                    $search = $_POST['search'];
+                    //seleziona tutti i campi compreso il tipo di prodotto.
+                    $sqlQuery = "SELECT inventario.*, tipo_prodotto.tipo 
                             FROM inventario 
                             INNER JOIN tipo_prodotto 
                             ON inventario.tipo_prodotto = tipo_prodotto.id 
@@ -130,14 +78,12 @@
                             OR descrizione like '%$search%' 
                             OR data_inserimento like '%$search%'";
 
-                $result = mysqli_query($conn, $sqlQuery);
+                    $result = mysqli_query($conn, $sqlQuery);
 
-
-
-                if ($result->num_rows > 0) {
-                    //creo struttura iniziale
-                    echo '<thead class="thead-light" >
-                <tr >
+                    if ($result->num_rows > 0) {
+                        //creo struttura iniziale
+                        echo '<thead>
+                <tr style="background: #81B0F3">
                     <th scope="row">Id</th>
                     <th scope="row">Nome del prodotto</th>
                     <th scope="row">Descrizione</th>
@@ -146,74 +92,75 @@
                     <th scope="row">Azioni</th>
                 </tr>
                     </thead>';
-                    // output data di ogni riga
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tbody>";
-                        echo "<tr style='background: #f7f9fa'>";
-                        echo "<td id='id_inventario'>" . $row["id_inventario"] . "</td>";
-                        echo "<td id='nome_prodotto'>" . $row["nome_prodotto"] . "</td>";
-                        echo "<td id='descrizione'>" . $row["descrizione"] . "</td>";
-                        echo "<td id='data_inserimento'>" . $row["data_inserimento"] . "</td>";
-                        echo "<td id='tipo_prodotto'>" . $row["tipo"] . "</td>";
-                        echo "<td><button class='btn btn-secondary btn-sm' style='margin-bottom:2px;' onclick=\"location.href='i_update.php?id_inventario=" . $row["id_inventario"] . "'\">Edit</button> <a href='i_delete.php?id_inventario=" . $row["id_inventario"] . "' class='btn btn-danger btn-sm'>Delete</a></td>";
-                        echo "</tr>";
-                        echo "</tbody>";
+                        // output data di ogni riga
+                        while ($row = $result->fetch_assoc()) {
+
+                            echo "<tbody>";
+                            echo "<tr style='background: #d5e3f5'>";
+                            echo "<td id='id_inventario'>" . $row["id_inventario"] . "</td>";
+                            echo "<td id='nome_prodotto'>" . $row["nome_prodotto"] . "</td>";
+                            echo "<td id='descrizione'>" . $row["descrizione"] . "</td>";
+                            echo "<td id='data_inserimento'>" . $row["data_inserimento"] . "</td>";
+                            echo "<td id='tipo_prodotto'>" . $row["tipo"] . "</td>";
+                            echo "<td><button class='btn btn-secondary btn-sm' style='margin-bottom:2px;' onclick=\"location.href='i_update.php?id_inventario=" . $row["id_inventario"] . "'\">Edit</button> <a href='i_delete.php?id_inventario=" . $row["id_inventario"] . "' class='btn btn-danger btn-sm'>Delete</a></td>";
+                            echo "</tr>";
+                            echo "</tbody>";
+                        }
+                    } else {
+                        echo "Nessun valore trovato";
                     }
-                } else {
-                    echo "Nessun valore trovato";
                 }
-            }
-
-
-            ?>
-        </table>
-
-
-
-
-
-
-
-
+                ?>
+            </table>
+        </div>
 
         <br>
 
 
-        <!-- visualizzazione elementi "carta" -->
-        <!--<div class="container">-->
-        <div class="item">
-            <button class="btn btn-primary btn-sm" onclick="showCarta()">Lista prodotti categoria 'CARTA'</button>
+        <!-- bottoni per elementi categorie -->
 
-            <span id="tableCarta" style="display:none">
-                <?php
-                include("selectCarta.php");
-                ?>
-            </span>
+        <div id="buttonContainer">
+            <h2>Ricerca per tipo prodotto.</h2>
+            <div id="buttonContainerChild">
+                <button class="btn btn-secondary btn-sm mt-3 bottone" onclick="showCarta()">Lista prodotti categoria 'CARTA'</button>
+                <button class="btn btn-secondary btn-sm mt-3 bottone" onclick="showBuste()">Lista prodotti categoria 'BUSTE'</button>
+                <button class="btn btn-secondary btn-sm mt-3 bottone" onclick="showToner()">Lista prodotti categoria 'TONER'</button>
+            </div>
         </div>
-        <!-- visualizzazione elementi "carta" -->
 
-        <div class="item">
-            <button class="btn btn-primary btn-sm" onclick="showBuste()">Lista prodotti categoria 'BUSTE'</button>
-            <span id="tableBuste" style="display:none">
-                <?php
-                include("selectBuste.php");
-                ?>
-            </span>
-            <!-- visualizzazione elementi "carta" -->
+
+
+
+        <!-- span per le tabelle -->
+        <!-- tabella carta -->
+
+        <span id="tableCarta" style="display:none">
+            <?php
+            include("selectCarta.php");
+            ?>
+        </span>
+        <!-- tabella buste -->
+        <span id="tableBuste" style="display:none">
+            <?php
+            include("selectBuste.php");
+            ?>
+        </span>
+        <!-- tabella toner -->
+        <span id="tableToner" style="display:none">
+            <?php
+            include("selectToner.php");
+            ?>
+        </span>
         </div>
-        <div class="item">
-            <button class="btn btn-primary btn-sm" onclick="showToner()">Lista prodotti categoria 'TONER'</button>
-            <span id="tableToner" style="display:none">
-                <?php
-                include("selectToner.php");
-                ?>
-            </span>
-        </div>
-        </div>
+        <script src="../script/productTypeShower.js"></script>
+
         <?php
         $conn->close();
         ?>
 
+
+        <!-- footer -->
+        <?php include("../footer.php"); ?>
     </body>
 
     </html>

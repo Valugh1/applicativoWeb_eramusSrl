@@ -2,42 +2,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-    <style>
-        body {
-
-            background: rgb(217, 245, 254);
-            background: linear-gradient(0deg, rgba(217, 245, 254, 1) 0%, rgba(244, 255, 255, 1) 100%);
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-        }
-
-        .form_color {
-            background-color: #e7edfe;
-        }
-
-        .form_header {
-            background-color: #007bff;
-            color: whitesmoke;
-        }
-
-        .form-group>input {
-            background-color: #4f749126;
-        }
-    </style>
+    <?php include("header.php"); ?>
+    <!-- style -->
+    <link rel="stylesheet" href="style/form.css">
     <title>Login</title>
 
 </head>
 
 <body>
-
     <div class="container">
 
         <div class="row">
@@ -68,7 +40,7 @@
 
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" type="button" id="button-append1" onclick="togglePassword()">
-                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                <i class="fa-solid fa-eye"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -100,7 +72,8 @@
         </div>
     </div>
 
-    <script src="script/script.js"></script>
+    <script src="script/passValidation.js"></script>
+    <?php include("footer.php"); ?>
 </body>
 
 </html>
