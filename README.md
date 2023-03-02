@@ -1,8 +1,8 @@
-Salve,
-questo e' il progetto in corso per creare l'applicativo richiesto.
-Ci sono state delle grandi modifiche al progetto, ho deciso di ricostruire la struttura della app per renderla piu' comprensibile.
+Questo e' il progetto ultimato per l'applicativo richiesto.
 
-modificato il 28/2/2023, modifiche alla parte front-end.
+modifiche del 28/2/2023: modifiche iniziali alla parte front-end.
 
-modificato il 01/03/2023, continuato programmazione lato front-end.
+modifiche del 01/03/2023: continuato programmazione lato front-end.
+
+modifiche del 02/03/2023: completato lato front-end e collegamenti delle varie pagine.
 
