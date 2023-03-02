@@ -22,21 +22,21 @@ $(document).ready(function () {
         }
 
     });
-
-    // password-rule div mostra/nascondi
-    $('#password').keyup(function () {
-        if ($('#password').val() !== false) {
-            $('#reg_passwordrules').removeClass('hide');
-            $('#reg-password-strength').removeClass('hide');
-        } else {
-            $('#reg_passwordrules').addClass('hide');
-            $('#reg-password-quality').addClass('hide')
-            $('#reg-password-quality-result').addClass('hide')
-            $('#reg-password-strength').addClass('hide')
-
-        }
-    });
-
+    /*
+        // password-rule div mostra/nascondi
+        $('#password').keyup(function () {
+            if ($('#password').val() !== false) {
+                $('#reg_passwordrules').removeClass('hide');
+                $('#reg-password-strength').removeClass('hide');
+            } else {
+                $('#reg_passwordrules').addClass('hide');
+                $('#reg-password-quality').addClass('hide')
+                $('#reg-password-quality-result').addClass('hide')
+                $('#reg-password-strength').addClass('hide')
+    
+            }
+        });
+    */
     // password-confirm error div mostra/nascondi
     $('#passwordconfirm').blur(function () {
         if ($('#password').val() !== $('#passwordconfirm').val()) {

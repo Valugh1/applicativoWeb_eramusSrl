@@ -180,9 +180,10 @@ session_start()
     $conn->close();
     ?>
 
-    <script src="../script/passValidation.js"></script>
+
     <!-- footer -->
     <?php include("../footer.php"); ?>
+    <script src="../script/passValidation.js"></script>
 </body>
 
 </html>
