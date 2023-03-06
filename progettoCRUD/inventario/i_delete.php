@@ -33,37 +33,42 @@
 
                                     <?php
                                     include_once("../session/config.php");
-
-                                    if ($_GET['id_inventario'] && !isset($_GET['conferma'])) {
+                                    /*non prende l'id a riga 37*/
+                                    if (isset($_GET['id_inventario']) && !isset($_GET['conferma'])) {
                                         //Fase 1
                                         $id = $_GET['id_inventario'];
-
-                                        $sqlQuery = "SELECT * FROM inventario WHERE id_inventario='$id'";
-                                        $result = mysqli_query($conn, $sqlQuery);
+                                        $sql = "SELECT * FROM inventario WHERE id_inventario= ?";
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->bind_param('i', $id);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
 
                                         if ($result->num_rows == 1) {
                                             // output data of each row --- $row["id"]
                                             $row = $result->fetch_assoc();
                                             echo "<div class='form-group'>";
                                             echo "<label for='id_inventario'>Id prodotto:</label><br>";
-                                            echo "<span  name='nome_prodotto' style='font-weight: bold'>" . $row["id_inventario"] .  "</span></div>";
+                                            echo "<span  name='id_inventario' value='" . $row["id_inventario"] . "' style='font-weight: bold'>" . $row["id_inventario"] .  "</span></div>";
 
                                             echo "<label for='nome_prodotto'>Nome prodotto:</label><br>";
                                             echo "<span  name='nome_prodotto' style='font-weight: bold'>" . $row["nome_prodotto"] .  "</span></div>";
 
                                             echo "Sei sicuro di eliminare questo prodotto?<br>";
-                                            echo "<input type='hidden' name='conferma' value='Elimina'>";
-                                            echo "<button class='btn btn-danger' type='submit' value=''>Si</button>";
+                                            echo "<input type='hidden' name='conferma' value='y'>";
+                                            echo "<input type='hidden' name='id_inventario' value='" . $row["id_inventario"] . "'>";
+                                            echo "<button class='btn btn-danger' type='submit' value='y'>Si</button>";
                                         }
-                                    } elseif ($_GET['id_inventario'] && $_GET['conferma']) {
+                                    } elseif (isset($_GET['id_inventario']) && $_GET['conferma'] == "y") {
                                         // Fase 2
                                         $id = $_GET['id_inventario'];
-                                        $sqlDelete = "DELETE FROM inventario WHERE id_inventario='$id' ";
-                                        if (mysqli_query($conn, $sqlDelete) === TRUE) {
-                                            echo "Record eliminato";
-                                        } else {
-                                            echo "Errore nella query di eliminazione: " . $sqlDelete . "<br>" . $conn->error;
-                                        }
+                                        $sqlDelete = "DELETE FROM inventario WHERE id_inventario= ? ";
+                                        $stmt = $conn->prepare($sqlDelete);
+                                        $stmt->bind_param('i', $id);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+                                        echo "Prodotto eliminato con successo!";
+                                    } else {
+                                        echo "Errore: " . $stmt->error();
                                     }
                                     $conn->close();
                                     ?>

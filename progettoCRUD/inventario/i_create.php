@@ -99,13 +99,19 @@ session_start()
         $materiali = $_POST["materiali"];
 
         // query creazione prodotto
-        $sql = "INSERT INTO inventario (nome_prodotto, descrizione, data_inserimento, tipo_prodotto)
-        VALUES ('$prod_name', '$descrizione', NOW(), '$materiali')";
+        $sql = "INSERT INTO inventario (nome_prodotto, descrizione, tipo_prodotto)
+        VALUES (?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('sss', $prod_name, $descrizione, $materiali);
+        $stmt->execute();
+        /*
         if (mysqli_query($conn, $sql) === TRUE) {
             echo "New record created successfully";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
+        */
     }
 
     $conn->close();

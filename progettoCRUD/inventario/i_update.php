@@ -41,8 +41,12 @@
                                     if ($_GET['id_inventario'] && !isset($_GET['nome_prodotto'])) {
                                         // FASE 1
                                         $id = $_GET['id_inventario'];
-                                        $sqlQuery = "SELECT * FROM inventario WHERE id_inventario='$id'";
-                                        $result = mysqli_query($conn, $sqlQuery);
+                                        $sql = "SELECT * FROM inventario WHERE id_inventario= ?";
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->bind_param('i', $id);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+
 
                                         if ($result->num_rows == 1) {
                                             // output prodotti
@@ -85,11 +89,16 @@
                                         $descrizione = $_GET['descrizione'];
                                         $tipo_prodotto = $_GET['materiali'];
 
-                                        $sql = "UPDATE inventario SET nome_prodotto='$nome_prodotto', descrizione='$descrizione', data_inserimento = NOW(), tipo_prodotto='$tipo_prodotto' WHERE id_inventario='$id'";
-                                        if ($conn->query($sql) === TRUE) {
-                                            echo "Record aggiornato";
+                                        $sql = "UPDATE inventario SET nome_prodotto= ?, descrizione= ?, tipo_prodotto= ? WHERE id_inventario= ?";
+
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->bind_param('sssi', $nome_prodotto, $descrizione, $tipo_prodotto, $id);
+                                        $stmt->execute();
+                                        if ($stmt->execute()) {
+                                            echo "Prodotto aggiornato!";
                                         } else {
-                                            echo "Error: " . $sql . "<br>" . $conn->error;
+                                            $errorInfo = $conn->error;
+                                            echo "Errore SQL: " . $errorInfo[2];
                                         }
                                     }
                                     $conn->close();

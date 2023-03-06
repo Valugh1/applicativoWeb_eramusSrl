@@ -17,36 +17,45 @@
 </html>
 <?php
 
-require_once("config.php");
+require("config.php");
 
-$username = $conn->real_escape_string($_POST["username"]);
-$password = $conn->real_escape_string($_POST['password']);
 
+echo $username;
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $sql_select = "SELECT * FROM utenti WHERE username = '$username'";
-    if ($risultato = $conn->query($sql_select)) {
-        if ($risultato->num_rows == 1) {
-            $row = $risultato->fetch_array(MYSQLI_ASSOC);
-            if (password_verify($password, $row['password'])) {
-                session_start();
+    $sql = "SELECT * FROM utenti WHERE username = ?";
+    $username = $conn->real_escape_string($_POST["username"]);
+    $password = $conn->real_escape_string($_POST['password']);
 
-                //setto variabili utente nella sessione
-                $_SESSION['loggato'] = true;
-                $_SESSION['username'] = $row['username'];
-                header("location: ../interfaccia_iniziale.php");
-            } else {
-                echo "<p class='text-danger'>la password non e' corretta</p> <pre>";
-                print_r($_POST);
-                echo " <br>" . $row['password'];
-                echo "<br> " . $password;
-            }
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row['password'])) {
+            session_start();
+
+            //setto variabili utente nella sessione
+            $_SESSION['loggato'] = true;
+            $_SESSION['username'] = $row['username'];
+            header("location: ../interfaccia_iniziale.php");
         } else {
-            echo "username inesistente";
-            // header("location: ../login_form.php?ui=username_inesistente");
+            echo "<p class='text-danger'>la password non e' corretta</p> <pre>";
+            print_r($_POST);
+            echo " <br>" . $row['password'];
+            echo "<br> " . $password;
         }
     } else {
-        echo "errore in fase di login";
+        echo "username inesistente";
+        $field_count = $result->fetch_assoc();
+        echo '<pre>';
+        print_r($field_count);
+        // header("location: ../login_form.php?ui=username_inesistente");
     }
+} else {
+    echo "errore in fase di login";
+
     $conn->close();
 }

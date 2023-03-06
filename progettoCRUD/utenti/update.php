@@ -41,8 +41,12 @@
                                     if ($_GET['id'] && !isset($_GET['username'])) {
                                         // FASE 1
                                         $id = $_GET['id'];
-                                        $sql = "SELECT * FROM utenti WHERE id='$id'";
-                                        $result = $conn->query($sql);
+                                        $sql = "SELECT * FROM utenti WHERE id=?";
+
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->bind_param('i', $id);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
 
                                         if ($result->num_rows == 1) {
                                             // output data of each row --- $row["id"]
@@ -54,8 +58,9 @@
                                             echo "<label for='username'>username:</label><br>";
                                             echo "<input type='text' id='username' name='username' value='" . $row["username"] .  "'></div>";
                                             echo "<div class='form-group'>";
-                                            echo "<label for='dob'>Data di nascita:</label><br>";
-                                            echo "<input type='text' id='dob' name='dob' value='" . $row["dob"] . "'></div>";
+                                            echo ' <label for="dob">Data di nascita:</label><br>';
+                                            echo ' <input type="date" id="dob" name="dob" value="' . $row["dob"] . '" placeholder="Data di nascita" required>';
+                                            echo '</div>';
                                             echo "<div class='form-group'>";
                                             echo "<label for='nome'>Nome:</label><br>";
                                             echo "<input type='text' id='nome' name='nome' value='" . $row["nome"] .  "'><div>";
@@ -70,13 +75,15 @@
                                         $id = $_GET['id'];
                                         $username = $_GET['username'];
                                         $dob = $_GET['dob'];
+                                        $nome = $_GET['nome'];
+                                        $cognome = $_GET['cognome'];
 
-                                        $sql = "UPDATE utenti SET username='$username', dob='$dob' WHERE id='$id'";
-                                        if ($conn->query($sql) === TRUE) {
-                                            echo "Record aggiornato";
-                                        } else {
-                                            echo "Error: " . $sql . "<br>" . $conn->error;
-                                        }
+                                        $sql = "UPDATE utenti SET username= ?, dob= ?,nome= ?, cognome = ? WHERE id= ?";
+
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->bind_param('ssssi', $username, $dob, $nome, $cognome, $id);
+                                        $stmt->execute();
+                                        echo "Utente aggiornato!";
                                     }
                                     $conn->close();
                                     ?>

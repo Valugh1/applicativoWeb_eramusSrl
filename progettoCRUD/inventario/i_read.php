@@ -83,6 +83,7 @@
                     if ($result->num_rows > 0) {
                         //creo struttura iniziale
                         echo '<thead>
+                        
                 <tr style="background: #81B0F3">
                     <th scope="row">Id</th>
                     <th scope="row">Nome del prodotto</th>

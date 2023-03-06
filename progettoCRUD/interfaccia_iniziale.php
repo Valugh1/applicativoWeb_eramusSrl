@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggato']) || ($_SESSION['loggato']) !== true) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <?php include("header.php"); ?>

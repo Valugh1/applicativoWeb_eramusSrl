@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <?php include("header.php"); ?>
@@ -54,26 +54,26 @@
 
                             </form>
                         </div>
+                        <div class="bottom text-center">
+                            Non hai ancora un account? <a href="registerForm.php"><b>Registrati</b></a>
+                            <?php
+                            if (isset($_GET["ui"]) && ($_GET["ui"] == "username_inesistente")) { ?>
 
-                        <?php
-                        if (isset($_GET["ui"]) && ($_GET["ui"] == "username_inesistente")) { ?>
+                                <script>
+                                    alert("Username inesistente!");
+                                </script>
 
-                            <script>
-                                alert("Username inesistente!");
-                                window.open("location: login.php", "target=_self");
-                            </script>
+                            <?php };
 
-                        <?php };
-
-                        ?>
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="script/passValidation.js"></script>
-    <?php include("footer.php"); ?>
+        <script src="script/passValidation.js"></script>
+        <?php include("footer.php"); ?>
 </body>
 
 </html>
