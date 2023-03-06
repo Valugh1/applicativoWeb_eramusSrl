@@ -48,11 +48,18 @@
                 //controllo e compiutazione ricerca
                 if (isset($_POST['submit'])) {
 
-                    $search = $_POST['search'];
+                    $search = "%" . $_POST['search'] . "%";
 
-                    $sqlQuery = "SELECT * FROM `utenti` WHERE id like '%$search%' OR username like '%$search%' OR nome like '%$search%' OR cognome like '%$search%'";
+                    $sql = "SELECT * FROM `utenti` 
+                    WHERE id like ? 
+                    OR username like ? 
+                    OR nome like ? 
+                    OR cognome like ?";
 
-                    $result = mysqli_query($conn, $sqlQuery); // $conn->query($sqlQuery);
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param('ssss', $search, $search, $search, $search);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
 
 

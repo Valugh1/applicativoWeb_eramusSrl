@@ -97,7 +97,7 @@
             <!-- bottone "indietro" -->
             <div class="row justify-content-center">
                 <div class="col-md-5">
-                    <button class="btn btn-secondary" onclick=' location.href="i_read.php"'>Indietro</button>
+                    <button class="btn btn-secondary" onclick=' location.href="read.php"'>Indietro</button>
                 </div>
             </div>
             <!-- footer -->

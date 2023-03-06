@@ -67,18 +67,20 @@
                 //controllo ricerca
                 if (isset($_POST['submit'])) {
 
-                    $search = $_POST['search'];
+                    $search = "%" . $_POST['search'] . "%";
                     //seleziona tutti i campi compreso il tipo di prodotto.
-                    $sqlQuery = "SELECT inventario.*, tipo_prodotto.tipo 
-                            FROM inventario 
-                            INNER JOIN tipo_prodotto 
-                            ON inventario.tipo_prodotto = tipo_prodotto.id 
-                            WHERE id_inventario like '%$search%' 
-                            OR nome_prodotto like '%$search%' 
-                            OR descrizione like '%$search%' 
-                            OR data_inserimento like '%$search%'";
-
-                    $result = mysqli_query($conn, $sqlQuery);
+                    $sql = "SELECT inventario.*, tipo_prodotto.tipo 
+                    FROM inventario 
+                    INNER JOIN tipo_prodotto 
+                    ON inventario.tipo_prodotto = tipo_prodotto.id 
+                    WHERE id_inventario LIKE ?
+                    OR nome_prodotto LIKE ? 
+                    OR descrizione LIKE ? 
+                    OR data_inserimento LIKE ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param('ssss', $search, $search, $search, $search);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
                     if ($result->num_rows > 0) {
                         //creo struttura iniziale
@@ -108,7 +110,8 @@
                             echo "</tbody>";
                         }
                     } else {
-                        echo "Nessun valore trovato";
+                        // echo "Nessun valore trovato";
+                        echo ("Nessun valore trovato");
                     }
                 }
                 ?>

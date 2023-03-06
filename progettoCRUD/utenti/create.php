@@ -169,12 +169,11 @@ session_start()
 
         // query creazione utente
         $sql = "INSERT INTO utenti (username, password, nome, cognome, dob)
-    VALUES ('$username','$password' , '$nome' , '$cognome' , '$dob')";
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+        VALUES (?,?,?,?,?)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('sssss', $username, $password, $nome, $cognome, $dob);
+        $stmt->execute();
     }
 
     $conn->close();
