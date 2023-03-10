@@ -1,4 +1,4 @@
-Questo e' il progetto ultimato per l'applicativo richiesto.
+Questa e' la base per un gestionale, creato utilizzando PHP/MySQL per backend e database, JS per frontend, e Bootstrap per lo stile.
 
 modifiche del 28/2/2023: modifiche iniziali alla parte front-end.
 
